@@ -1,62 +1,51 @@
 #include <iostream>
-
 using namespace std;
 
+/* 
+2. Implementa un programa para calcular el producto de dos números 
+mediante sumas sucesivas en C++. La idea es que el producto de dos 
+números a y b se puede obtener sumando a a sí mismo b veces. (utiliza 
+tanto recursividad como iteración, se debe implementar un ejercicio 
+tanto para recursividad como para iteración) 
+
+*/
+
+// Definicion de la funcion factorial
+int productoRecursivo(int a, int b) {
+    // base
+    if (b == 0) {
+        return 0;
+    } else {
+        // llamada recursiva de la funcion
+        return a + productoRecursivo(a, b - 1);
+    }
+}
+
+// versión iterativa (recursividad vs iteración)
+int productoIterativo(int a, int b) {
+    int resultado = 0;
+    for (int i = 0; i < b; i++) {
+        resultado += a;
+    }
+    return resultado;
+}
+
 int main() {
-    // Saldo inicial
-    double saldo = 500.0;
-    int opcion;
-    double monto;
+    int a, b;
 
-    cout << "Bienvenido al cajero automático\n";
+    cout << "Ingrese el primer número (a): ";
+    cin >> a;
 
-    do {
-        // Menú de opciones
-        cout << "\nSeleccione una opción:\n";
-        cout << "1. Consultar saldo\n";
-        cout << "2. Depositar dinero\n";
-        cout << "3. Retirar dinero\n";
-        cout << "4. Salir\n";
-        cout << "Opción: ";
-        cin >> opcion;
+    cout << "Ingrese el segundo número (b): ";
+    cin >> b;
 
-        switch(opcion) {
-            case 1:
-                // Consultar saldo
-                cout << "Su saldo actual es: $" << saldo << "\n";
-                break;
-            case 2:
-                // Depositar dinero
-                cout << "Ingrese el monto a depositar: $";
-                cin >> monto;
-                if (monto > 0) {
-                    saldo += monto;
-                    cout << "Depósito exitoso. Su nuevo saldo es: $" << saldo << "\n";
-                } else {
-                    cout << "El monto debe ser positivo.\n";
-                }
-                break;
-            case 3:
-                // Retirar dinero
-                cout << "Ingrese el monto a retirar: $";
-                cin >> monto;
-                if (monto > 0 && monto <= saldo) {
-                    saldo -= monto;
-                    cout << "Retiro exitoso. Su nuevo saldo es: $" << saldo << "\n";
-                } else if (monto > saldo) {
-                    cout << "Error: No tiene saldo suficiente.\n";
-                } else {
-                    cout << "El monto debe ser positivo.\n";
-                }
-                break;
-            case 4:
-                // Salir
-                cout << "Gracias por usar el cajero automático. ¡Hasta luego!\n";
-                break;
-            default:
-                cout << "Opción no válida. Por favor, intente nuevamente.\n";
-        }
-    } while (opcion != 4);
+    // ejemplo básico usando recursión
+    int resultadoRecursivo = productoRecursivo(a, b);
+    cout << "Producto (usando recursividad): " << resultadoRecursivo << endl;
+
+    // Usando iteración
+    int resultadoIterativo = productoIterativo(a, b);
+    cout << "Producto (usando iteración): " << resultadoIterativo << endl;
 
     return 0;
 }

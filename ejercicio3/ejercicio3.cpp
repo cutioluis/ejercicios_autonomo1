@@ -1,42 +1,36 @@
 #include <iostream>
-
-
+#include <string>
 using namespace std;
 
-
-/* 
-
-Crea un programa en C++ que: 
-    • Solicite al usuario una contraseña. 
-    • Use una estructura de repetición para pedir la contraseña hasta que 
-    sea correcta (puedes definirla como "12345"). 
-    • Una vez ingresada correctamente, use un ciclo de repetición para 
-    mostrar un mensaje de bienvenida cinco veces. 
-
-*/
-
-int main( ) {
-
-    string password;
-
-    // Imprimes mansaje de ingresar contrase;a
-    cout << "Ingresa el password: ";
-    cin >> password;
-
-    // si la variable password es igual a 12345
-    if (password == "12345")
-    {
-        // si es igual hace un for para iterar el mensaje bievenido 5 veces
-        for (size_t i = 0; i < 5; i++)
-        {
-            cout << "Bienvenido \n";
-        }
-
-         // si no es igual muestra este mensaje
-    } else {
-        cout << "Clave Incorrecta:";
+// definicion de la funcion recursiva contar vocales
+int contarVocalesRecursivo(const string& texto, int indice) {
+    // Caso base: cuando se llega al final de la cadena
+    if (indice >= texto.length()) {
+        return 0;
     }
-    
-    
+
+    // Verificar si el carácter actual es una vocal
+    // sopor te para vocales minusculas y mayusculas
+    char c = tolower(texto[indice]); 
+    int esVocal = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') ? 1 : 0;
+
+    // llamada recursiva
+    return esVocal + contarVocalesRecursivo(texto, indice + 1);
+}
+
+int main() {
+    //variable
+    string cadena;
+
+    // peticion al usuario ingrese una cadena de texto
+    cout << "ingrese el string (cadena de texto): ";
+    getline(cin, cadena);
+
+    // ejemplo basico de uso de la funcion recursiva
+    int totalVocales = contarVocalesRecursivo(cadena, 0);
+
+    // imprimir el resultado
+    cout << "n vocales: " << totalVocales << endl;
+
     return 0;
 }
