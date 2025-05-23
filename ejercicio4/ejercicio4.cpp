@@ -1,80 +1,38 @@
 #include <iostream>
-
+#include <string>
 using namespace std;
 
+// funcion recursiva para generar permutaciones
+void generadorPermutacion(string& cadena, int inicio, int fin) {
+    // Caso base: cuando inicio llega al final, imprimimos la permutación
+    if (inicio == fin) {
+        cout << cadena << endl;
+    } else {
+        // for para intercambiar cada letra con la letra en la posición de inicio
+        for (int i = inicio; i <= fin; i++) {
+            swap(cadena[inicio], cadena[i]); // intercambiar letras
 
+            // Llamada recursiva 
+            generadorPermutacion(cadena, inicio + 1, fin);
 
-/* 
-
-Crea un programa que evalúe el desempeño de un empleado 
-basado en su calificación de desempeño y su antigüedad en la empresa. 
-
-    Se clasificará el desempeño del empleado en "Excelente", "Bueno" o 
-    "Necesita Mejora", y se calculará un bono adicional según la antigüedad:
-
-    Calificación de Desempeño: 
-    • 90-100: "Excelente" 
-    • 70-89: "Bueno" 
-    • Menos de 70: "Necesita Mejora" 
-
-    Bono según Antigüedad: 
-    • Menos de 1 año: 0% del salario. 
-    • Entre 1 y 3 años: 5% del salario. 
-    • Más de 3 años: 10% del salario. 
-
-    Tener en cuenta que se debe solicitar por teclado, la calificación, la 
-    antigüedad y el salario (usando los tipos de datos adecuados), adicional, 
-    el bono resulta de la multiplicación del salario por el porcentaje que se 
-    muestra antes.
-
-*/
+            // hace un swap para volver a la cadena original usando swap
+            swap(cadena[inicio], cadena[i]);
+        }
+    }
+}
 
 int main() {
 
+    // variable y lectura
+    string texto;
+    cout << "Ingrese una cadena de texto: ";
+    cin >> texto;
 
-    // declaracion de variables
-    int calificacion;
-    float antiguedad;
-    double salario;
-    double bono = 0.0;
-    string desempeño;
+    // imprimir la cadena ingresada
+    cout << "\nPermutaciones posibles:\n";
 
-    // Solicitar la calificación
-    cout << "Ingresa la calificacion del empleado (0-100): ";
-    cin >> calificacion;
-
-    // Clasificar el desempeño
-    if (calificacion >= 90 && calificacion <= 100) {
-        desempeño = "Excelente";
-    } else if (calificacion >= 70 && calificacion <= 89) {
-        desempeño = "Bueno";
-    } else if (calificacion >= 0 && calificacion < 70) {
-        desempeño = "Necesita Mejora";
-    } else {
-        cout << "Calificación inválida." << endl;
-        return 1;
-    }
-
-    // Solicitar la antigüedad
-    cout << "Ingresa la antigüedad del empleado (en años): ";
-    cin >> antiguedad;
-
-    // Solicitar el salario
-    cout << "Ingresa el salario del empleado: ";
-    cin >> salario;
-
-    // Calcular bono basado en la antigüedad
-    if (antiguedad < 1) {
-        bono = 0.0;
-    } else if (antiguedad >= 1 && antiguedad <= 3) {
-        bono = salario * 0.05;
-    } else if (antiguedad > 3) {
-        bono = salario * 0.10;
-    }
-
-    // Mostrar resultados
-    cout << "Desempeño: " << desempeño << endl;
-    cout << "Bono adicional: $" << bono << endl;
+    // llamada a la funcion recursiva
+    generadorPermutacion(texto, 0, texto.length() - 1);
 
     return 0;
 }
